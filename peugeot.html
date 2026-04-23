@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Peugeot Maintenance System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{
+background:#f5f7fa;
+font-family:Arial;
+}
+
+.navbar{
+box-shadow:0 2px 15px rgba(0,0,0,.12);
+}
+
+.navbar-brand{
+font-size:24px;
+font-weight:bold;
+}
+
+.nav-link{
+padding:10px 18px !important;
+border-radius:8px;
+font-weight:600;
+transition:.3s;
+}
+
+.nav-link:hover{
+background:#198754;
+}
+
+.active-link{
+background:#198754;
+}
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:25px;
+}
+
+.logo{
+width:120px;
+}
+
+.card{
+border:none;
+border-radius:18px;
+}
+
+.card:hover{
+transform:translateY(-5px);
+transition:.3s;
+}
+
+.optional{
+border:2px dashed orange;
+}
+
+.total-box{
+background:#198754;
+color:#fff;
+padding:20px;
+border-radius:14px;
+font-size:20px;
+box-shadow:0 5px 20px rgba(0,0,0,.1);
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<div class="container">
+
+<a class="navbar-brand" href="#">
+ Maintenance System
+</a>
+
+<button class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#menu">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="menu">
+<ul class="navbar-nav ms-auto">
+
+<li class="nav-item">
+<a class="nav-link"
+href="index.html">
+Suzuki
+</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link active-link"
+href="peugeot.html">
+Peugeot
+</a>
+</li>
+
+</ul>
+</div>
+
+</div>
+</nav>
+
+
+
+<div class="container">
+
+<div class="header">
+
+<img
+src="Peugeot-logo-500x333.png"
+class="logo">
+
+<h3 class="fw-bold">
+Peugeot Maintenance
+</h3>
+
+</div>
+
+
+<div class="row mt-4">
+<div class="col-md-6">
+<select id="car" class="form-select">
+<option>Select Car</option>
+</select>
+</div>
+
+<div class="col-md-6">
+<select id="service" class="form-select">
+<option>Select Service</option>
+</select>
+</div>
+</div>
+
+
+<div class="row mt-4" id="results"></div>
+
+<div class="mt-4 mb-5">
+<div id="total" class="total-box">
+Select Car and Service
+</div>
+</div>
+
+</div>
+
+
+<script>
+const data = {
+  "301": {
+
+    "10000": { labor: 288, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 }
+    ]},
+
+    "20000": { labor: 650, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات ", price: 450 },
+      { part: "فلتر هواء", price: 260 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+    ]},
+
+    "30000": { labor: 368, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "زيت فتييس", price: 3450 }
+    ]},
+
+    "40000": { labor: 650, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات ", price: 450 },
+      { part: "فلتر هواء", price: 260 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+    ]},
+
+    "50000": { labor: 288, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 }
+    ]},
+
+    "60000": { labor: 1600, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات ", price: 450 },
+      { part: "فلتر هواء", price: 260 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+      { part: "زيت فتييس", price: 3450 },
+      { part: "طقم مجموعة", price: 2900 },
+      { part: "طقم كاتينة", price: 2600 },
+      { part: "طلمبة مياه", price: 2900 },
+      { part: "مياه تبريد", price: 650 },
+    ]},
+
+    "70000": { labor: 288, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 }
+    ]},
+
+    "80000": { labor: 650, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات ", price: 450 },
+      { part: "فلتر هواء", price: 260 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+    ]},
+
+    "90000": { labor: 368, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "زيت فتييس", price: 3450 }
+    ]},
+
+    "100000": { labor: 650, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات ", price: 450 },
+      { part: "فلتر هواء", price: 260 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+    ]},
+
+    "110000": { labor: 288, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 }
+    ]},
+
+    "120000": { labor: 1600, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات ", price: 450 },
+      { part: "فلتر هواء", price: 260 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+      { part: "زيت فتييس", price: 3450 },
+      { part: "طقم مجموعة", price: 2900 },
+      { part: "طقم كاتينة", price: 2600 },
+      { part: "طلمبة مياه", price: 2900 },
+      { part: "مياه تبريد", price: 650 },
+    ]},
+
+    "130000": { labor: 288, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 }
+    ]},
+
+    "140000": { labor: 650, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات ", price: 450 },
+      { part: "فلتر هواء", price: 260 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+    ]},
+
+    "150000": { labor: 368, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "زيت فتييس", price: 3450 }
+    ]},
+
+    "160000": { labor: 650, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات ", price: 450 },
+      { part: "فلتر هواء", price: 260 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+    ]},
+
+    "170000": { labor: 288, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 }
+    ]},
+
+    "180000": { labor: 1600, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات ", price: 450 },
+      { part: "فلتر هواء", price: 260 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+      { part: "زيت فتييس", price: 3450 },
+      { part: "طقم مجموعة", price: 2900 },
+      { part: "طقم كاتينة", price: 2600 },
+      { part: "طلمبة مياه", price: 2900 },
+      { part: "مياه تبريد", price: 650 },
+    ]},
+
+    "190000": { labor: 288, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 }
+    ]},
+
+    "200000": { labor: 650, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات ", price: 450 },
+      { part: "فلتر هواء", price: 260 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+    ]},
+
+
+  
+
+
+  
+  },  
+ 
+ 
+  "508": {
+
+    "10000": { labor: 540, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2730 },
+      { part: "فلتر زيت", price: 237 },
+    ]},
+
+    "20000": { labor: 705, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2730 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات", price: 2600 },
+      { part: "فلتر هواء", price: 437.5 },
+      { part: "فلتر بنزين", price: 230 }
+    ]},
+
+    "30000": { labor: 540, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2730 },
+      { part: "فلتر زيت", price: 237 },
+    ]},
+
+    "40000": { labor: 855, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2730 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات", price: 2600 },
+      { part: "فلتر هواء", price: 437.5 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+    ]},
+
+    "50000": { labor: 540, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2730 },
+      { part: "فلتر زيت", price: 237 },
+    ]},
+
+    "60000": { labor: 705, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2730 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات", price: 2600 },
+      { part: "فلتر هواء", price: 437.5 },
+      { part: "فلتر بنزين", price: 230 }
+    ]},
+
+    "70000": { labor: 540, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2730 },
+      { part: "فلتر زيت", price: 237 },
+    ]},
+
+    "80000": { labor: 855, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2730 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات", price: 2600 },
+      { part: "فلتر هواء", price: 437.5 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+    ]},
+
+    "90000": { labor: 540, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2730 },
+      { part: "فلتر زيت", price: 237 },
+    ]},
+
+    "100000": { labor: 705, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2730 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات", price: 2600 },
+      { part: "فلتر هواء", price: 437.5 },
+      { part: "فلتر بنزين", price: 230 }
+    ]},
+
+    "110000": { labor: 540, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2730 },
+      { part: "فلتر زيت", price: 237 },
+    ]},
+
+    "120000": { labor: 855, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2730 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات", price: 2600 },
+      { part: "فلتر هواء", price: 437.5 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+    ]},
+
+    "130000": { labor: 540, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2730 },
+      { part: "فلتر زيت", price: 237 },
+    ]},
+
+    "140000": { labor: 705, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2730 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات", price: 2600 },
+      { part: "فلتر هواء", price: 437.5 },
+      { part: "فلتر بنزين", price: 230 }
+    ]},
+
+    "150000": { labor: 540, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2730 },
+      { part: "فلتر زيت", price: 237 },
+    ]},
+
+    "160000": { labor: 855, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2730 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات", price: 2600 },
+      { part: "فلتر هواء", price: 437.5 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+    ]},
+
+    "170000": { labor: 540, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2730 },
+      { part: "فلتر زيت", price: 237 },
+    ]},
+
+    "180000": { labor: 705, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2730 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات", price: 2600 },
+      { part: "فلتر هواء", price: 437.5 },
+      { part: "فلتر بنزين", price: 230 }
+    ]},
+
+    "190000": { labor: 540, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2730 },
+      { part: "فلتر زيت", price: 237 },
+    ]},
+
+    "200000": { labor: 855, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2730 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات", price: 2600 },
+      { part: "فلتر هواء", price: 437.5 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+    ]},
+
+  },
+
+};
+
+const optionalParts=[
+{part:"اسبريه فوم",price:92},
+{part:"مياه مساحات",price:30},
+{part:"غسيل السيارة",price:65},
+];
+
+
+const carSelect=document.getElementById("car");
+const serviceSelect=document.getElementById("service");
+
+
+Object.keys(data).forEach(car=>{
+carSelect.innerHTML+=`
+<option value="${car}">
+${car}
+</option>`;
+});
+
+
+carSelect.onchange=function(){
+
+serviceSelect.innerHTML=
+`<option>Select Service</option>`;
+
+Object.keys(data[this.value]).forEach(s=>{
+
+serviceSelect.innerHTML+=`
+<option value="${s}">
+${s} KM
+</option>`;
+
+});
+
+};
+
+
+
+serviceSelect.onchange=function(){
+
+let car=carSelect.value;
+let service=this.value;
+
+let results=
+document.getElementById("results");
+
+results.innerHTML="";
+
+
+data[car][service].parts.forEach(item=>{
+results.innerHTML+=
+createCard(item,true);
+});
+
+
+optionalParts.forEach(item=>{
+results.innerHTML+=
+createCard(item,false,true);
+});
+
+
+updateTotal();
+
+};
+
+
+
+function createCard(
+item,
+checked,
+optional=false
+){
+
+return `
+<div class="col-md-4 mb-4">
+
+<div class="card shadow
+${optional?'optional':''}">
+
+<div class="card-body text-center">
+
+<input
+type="checkbox"
+${checked?'checked':''}
+data-price="${item.price}"
+onchange="updateTotal()">
+
+<h5 class="mt-3">
+${item.part}
+</h5>
+
+<p>
+${item.price} EGP
+</p>
+
+${
+optional?
+"<small class='text-warning'>Optional</small>"
+:""
+}
+
+</div>
+
+</div>
+
+</div>
+`;
+
+}
+
+
+
+function updateTotal(){
+
+let car=carSelect.value;
+let service=serviceSelect.value;
+
+if(!data[car]||!data[car][service]) return;
+
+let labor=
+data[car][service].labor;
+
+let consumables=
+data[car][service].consumables;
+
+let partsSum=0;
+
+document
+.querySelectorAll(
+"input[type=checkbox]"
+)
+.forEach(cb=>{
+
+if(cb.checked)
+partsSum+=Number(
+cb.dataset.price
+);
+
+});
+
+
+let subtotal=
+partsSum+
+labor+
+consumables;
+
+let tax=
+subtotal*0.14;
+
+let total=
+subtotal+tax;
+
+
+document.getElementById(
+"total"
+).innerHTML=`
+
+<b>Parts:</b>
+${partsSum.toFixed(2)} EGP
+<br>
+
+<b>Labor:</b>
+${labor} EGP
+<br>
+
+<b>Consumables:</b>
+${consumables} EGP
+<br>
+
+<b>Tax:</b>
+${tax.toFixed(2)} EGP
+
+<hr>
+
+<b>Total:</b>
+${total.toFixed(2)} EGP
+
+`;
+
+}
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
