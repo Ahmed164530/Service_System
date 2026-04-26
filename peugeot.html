@@ -78,8 +78,8 @@ box-shadow:0 5px 20px rgba(0,0,0,.1);
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 <div class="container">
 
-<a class="navbar-brand" href="#">
- Maintenance System
+<a class="navbar-brand" href="index.html">
+ CDCM Maintenance System
 </a>
 
 <button class="navbar-toggler"
@@ -95,16 +95,25 @@ data-bs-target="#menu">
 <li class="nav-item">
 <a class="nav-link"
 href="index.html">
+Home
+</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link"
+href="suzuki.html">
 Suzuki
 </a>
 </li>
 
 <li class="nav-item">
-<a class="nav-link active-link"
+<a class="nav-link"
 href="peugeot.html">
 Peugeot
 </a>
 </li>
+
+
 
 </ul>
 </div>
@@ -157,7 +166,7 @@ Select Car and Service
 
 <script>
 const data = {
-  "301": {
+  "301/ 307/ 406/ 408": {
 
     "10000": { labor: 288, consumables: 119, parts: [
       { part: "زيت موتور", price: 2185 },
@@ -317,15 +326,166 @@ const data = {
       { part: "زيت فرامل", price: 185 },
     ]},
 
+  },  
+  "301 2020-2026": {
 
-  
+    "10000": { labor: 288, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 }
+    ]},
 
+    "20000": { labor: 650, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات ", price: 450 },
+      { part: "فلتر هواء", price: 260 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+    ]},
 
-  
+    "30000": { labor: 368, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 }
+    ]},
+
+    "40000": { labor: 650, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات ", price: 450 },
+      { part: "فلتر هواء", price: 260 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+    ]},
+
+    "50000": { labor: 288, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 }
+    ]},
+
+    "60000": { labor: 1600, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات ", price: 450 },
+      { part: "فلتر هواء", price: 260 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+      { part: "طقم مجموعة", price: 2900 },
+      { part: "طقم كاتينة", price: 2600 },
+      { part: "طلمبة مياه", price: 2900 },
+      { part: "مياه تبريد", price: 650 },
+    ]},
+
+    "70000": { labor: 288, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 }
+    ]},
+
+    "80000": { labor: 650, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات ", price: 450 },
+      { part: "فلتر هواء", price: 260 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+    ]},
+
+    "90000": { labor: 368, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+      
+    ]},
+
+    "100000": { labor: 650, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات ", price: 450 },
+      { part: "فلتر هواء", price: 260 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+    ]},
+
+    "110000": { labor: 288, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 }
+    ]},
+
+    "120000": { labor: 1600, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات ", price: 450 },
+      { part: "فلتر هواء", price: 260 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+      { part: "طقم مجموعة", price: 2900 },
+      { part: "طقم كاتينة", price: 2600 },
+      { part: "طلمبة مياه", price: 2900 },
+      { part: "مياه تبريد", price: 650 },
+    ]},
+
+    "130000": { labor: 288, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 }
+    ]},
+
+    "140000": { labor: 650, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات ", price: 450 },
+      { part: "فلتر هواء", price: 260 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+    ]},
+
+    "150000": { labor: 368, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+    ]},
+
+    "160000": { labor: 650, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات ", price: 450 },
+      { part: "فلتر هواء", price: 260 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+    ]},
+
+    "170000": { labor: 288, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 }
+    ]},
+
+    "180000": { labor: 1600, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات ", price: 450 },
+      { part: "فلتر هواء", price: 260 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+      { part: "طقم مجموعة", price: 2900 },
+      { part: "طقم كاتينة", price: 2600 },
+      { part: "طلمبة مياه", price: 2900 },
+      { part: "مياه تبريد", price: 650 },
+    ]},
+
+    "190000": { labor: 288, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 }
+    ]},
+
+    "200000": { labor: 650, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2185 },
+      { part: "فلتر زيت", price: 237 },
+      { part: "بوجيهات ", price: 450 },
+      { part: "فلتر هواء", price: 260 },
+      { part: "فلتر بنزين", price: 230 },
+      { part: "زيت فرامل", price: 185 },
+    ]},
+
   },  
  
  
-  "508": {
+  "508 /208 /308 / 2008 / 3008": {
 
     "10000": { labor: 540, consumables: 119, parts: [
       { part: "زيت موتور", price: 2730 },
@@ -384,6 +544,7 @@ const data = {
     "90000": { labor: 540, consumables: 119, parts: [
       { part: "زيت موتور", price: 2730 },
       { part: "فلتر زيت", price: 237 },
+      { part: "طقم مجموعة", price: 4550 },
     ]},
 
     "100000": { labor: 705, consumables: 119, parts: [
@@ -445,7 +606,8 @@ const data = {
       { part: "فلتر زيت", price: 237 },
       { part: "بوجيهات", price: 2600 },
       { part: "فلتر هواء", price: 437.5 },
-      { part: "فلتر بنزين", price: 230 }
+      { part: "فلتر بنزين", price: 230 },
+      { part: "طقم مجموعة", price: 4550 },
     ]},
 
     "190000": { labor: 540, consumables: 119, parts: [

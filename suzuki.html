@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Suzuki Maintenance System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" >
+
+<style>
+body{
+background:#f5f7fa;
+font-family:Arial;
+}
+
+.navbar{
+box-shadow:0 2px 15px rgba(0,0,0,.12);
+}
+
+.navbar-brand{
+font-size:24px;
+font-weight:bold;
+}
+
+.nav-link{
+padding:10px 18px !important;
+border-radius:8px;
+font-weight:600;
+transition:.3s;
+}
+
+.nav-link:hover{
+background:#198754;
+}
+
+.active-link{
+background:#198754;
+}
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:25px;
+}
+
+
+.logo{
+width:120px;
+}
+
+
+.card{
+border:none;
+border-radius:18px;
+}
+
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card:hover{
+transform:translateY(-5px);
+transition:.3s;
+}
+
+.optional{
+border:2px dashed orange;
+}
+
+.total-box{
+background:#198754;
+color:#fff;
+padding:20px;
+border-radius:14px;
+font-size:20px;
+box-shadow:0 5px 20px rgba(0,0,0,.1);
+}
+</style>
+</head>
+<body>
+
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<div class="container">
+
+<a class="navbar-brand" href="index.html">
+ CDCM Maintenance System
+</a>
+
+<button class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#menu">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="menu">
+<ul class="navbar-nav ms-auto">
+
+
+<li class="nav-item">
+<a class="nav-link"
+href="index.html">
+Home
+</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link"
+href="suzuki.html">
+Suzuki
+</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link"
+href="peugeot.html">
+Peugeot
+</a>
+</li>
+
+
+
+</ul>
+</div>
+
+</div>
+</nav>
+
+
+
+<div class="container">
+
+<div class="header">
+<img
+src="images.png"
+class="logo">
+
+<h3 class="fw-bold">
+Suzuki Maintenance 
+</h3>
+</div>
+
+
+<div class="row mt-4">
+<div class="col-md-6">
+<select id="car" class="form-select">
+<option>Select Car</option>
+</select>
+</div>
+
+<div class="col-md-6">
+<select id="service" class="form-select">
+<option>Select Service</option>
+</select>
+</div>
+</div>
+
+
+<div class="row mt-4" id="results"></div>
+
+<div class="mt-4 mb-5">
+<div id="total" class="total-box">
+Select Car and Service
+</div>
+</div>
+
+</div>
+
+
+<script>
+
+
+// ================= DATA =================
+const data = {
+  "سويفت / ديزاير - Swift / Dzire": {
+
+    // "1000": { labor: 0, consumables: 119, parts: [
+    //   { part: "زيت موتور", price: 1823 },
+    //   { part: "فلتر زيت", price: 280 }
+    // ]},
+
+    "10000": { labor: 480, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "20000": { labor: 720, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1540 },
+      { part: "فلتر هواء", price: 690 },
+      { part: "فلتر تكييف", price: 700 }
+    ]},
+
+    "30000": { labor: 480, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "40000": { labor: 960, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1540 },
+      { part: "زيت فتيس", price: 1590 },
+      { part: "سيور المحرك", price: 1209 },
+      { part: "مياه تبريد", price: 650 },
+      { part: "فلتر هواء", price: 690 },
+      { part: "فلتر تكييف", price: 700 }
+    ]},
+
+    "50000": { labor: 480, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "60000": { labor: 720, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1540 },
+      { part: "زيت فرامل", price: 160 },
+      { part: "فلتر هواء", price: 690 },
+      { part: "فلتر تكييف", price: 700 }
+    ]},
+
+    "70000": { labor: 480, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 },
+    ]},
+
+    "80000": { labor: 960, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1540 },
+      { part: "زيت فتيس", price: 1590 },
+      { part: "سيور المحرك", price: 1209 },
+      { part: "مياه تبريد", price: 650 },
+      { part: "فلتر هواء", price: 690 },
+      { part: "فلتر تكييف", price: 700 }
+    ]},
+
+    "90000": { labor: 480, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "100000": { labor: 720, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1540 },
+      { part: "فلتر هواء", price: 690 },
+      { part: "فلتر تكييف", price: 700 }
+    ]}
+  },  
+  "Baleno / بالينو": {
+
+    // "1000": { labor: 0, consumables: 119, parts: [
+    //   { part: "زيت موتور", price: 1823 },
+    //   { part: "فلتر زيت", price: 280 }
+    // ]},
+
+    "10000": { labor: 520, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "20000": { labor: 780, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1540 },
+      { part: "فلتر هواء", price: 780 },
+      { part: "فلتر تكييف", price: 700 }
+    ]},
+
+    "30000": { labor: 520, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "40000": { labor: 1040, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1540 },
+      { part: "زيت فتيس", price: 1875 },
+      { part: "سيور المحرك", price: 1400 },
+      { part: "مياه تبريد", price: 650 },
+      { part: "فلتر هواء", price: 780 },
+      { part: "فلتر تكييف", price: 700 }
+    ]},
+
+    "50000": { labor: 520, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "60000": { labor: 780, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1540 },
+      { part: "زيت فرامل", price: 160 },
+      { part: "فلتر هواء", price: 780 },
+      { part: "فلتر تكييف", price: 700 }
+    ]},
+
+    "70000": { labor: 520, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 },
+    ]},
+
+    "80000": { labor: 1040, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1540 },
+      { part: "زيت فتيس", price: 1875 },
+      { part: "سيور المحرك", price: 1400 },
+      { part: "مياه تبريد", price: 650 },
+      { part: "فلتر هواء", price: 780 },
+      { part: "فلتر تكييف", price: 700 }
+    ]},
+
+    "90000": { labor: 520, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "100000": { labor: 780, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1540 },
+      { part: "فلتر هواء", price: 780 },
+      { part: "فلتر تكييف", price: 700 }
+    ]}
+  },
+  "CIAZ / سياز": {
+
+    "10000": { labor: 520, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "20000": { labor: 780, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1540 },
+      { part: "فلتر هواء", price: 780 },
+      { part: "فلتر تكييف", price: 660 }
+    ]},
+
+    "30000": { labor: 520, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "40000": { labor: 1040, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1540 },
+      { part: "زيت فتيس", price: 1875 },
+      { part: "سيور المحرك", price: 1250 },
+      { part: "مياه تبريد", price: 650 },
+      { part: "فلتر هواء", price: 780 },
+      { part: "فلتر تكييف", price: 660},
+      { part: "فلتر بنزين", price: 627}
+    ]},
+
+    "50000": { labor: 520, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "60000": { labor: 780, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1540 },
+      { part: "زيت فرامل", price: 160 },
+      { part: "فلتر هواء", price: 780 },
+      { part: "فلتر تكييف", price: 660 }
+    ]},
+
+    "70000": { labor: 520, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 },
+    ]},
+
+    "80000": { labor: 1040, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1540 },
+      { part: "زيت فتيس", price: 1875 },
+      { part: "سيور المحرك", price: 1250 },
+      { part: "مياه تبريد", price: 650 },
+      { part: "فلتر هواء", price: 780 },
+      { part: "فلتر تكييف", price: 660},
+      { part: "فلتر بنزين", price: 627}
+    ]},
+
+    "90000": { labor: 520, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "100000": { labor: 780, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1540 },
+      { part: "فلتر هواء", price: 780 },
+      { part: "فلتر تكييف", price: 660 }
+    ]}
+  },
+  "Ertiga / ارتيجا": {
+
+    "10000": { labor: 520, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "20000": { labor: 780, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1540 },
+      { part: "فلتر هواء", price: 780 },
+      { part: "فلتر تكييف", price: 700 }
+    ]},
+
+    "30000": { labor: 520, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "40000": { labor: 1040, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1540 },
+      { part: "زيت فتيس", price: 1875 },
+      { part: "سيور المحرك", price: 1250 },
+      { part: "مياه تبريد", price: 650 },
+      { part: "فلتر هواء", price: 780 },
+      { part: "فلتر تكييف", price: 700}
+    ]},
+
+    "50000": { labor: 520, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "60000": { labor: 780, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1540 },
+      { part: "زيت فرامل", price: 160 },
+      { part: "فلتر هواء", price: 780 },
+      { part: "فلتر تكييف", price: 700 }
+    ]},
+
+    "70000": { labor: 520, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 },
+    ]},
+
+    "80000": { labor: 1040, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1540 },
+      { part: "زيت فتيس", price: 1875 },
+      { part: "سيور المحرك", price: 1250 },
+      { part: "مياه تبريد", price: 650 },
+      { part: "فلتر هواء", price: 780 },
+      { part: "فلتر تكييف", price: 700}
+    ]},
+
+    "90000": { labor: 520, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "100000": { labor: 780, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1912 },
+      { part: "فلتر زيت", price: 280 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1540 },
+      { part: "فلتر هواء", price: 780 },
+      { part: "فلتر تكييف", price: 700 }
+    ]}
+  },
+  "Spersso / اسبريسو": {
+
+    "10000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "20000": { labor: 600, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1180 },
+      { part: "فلتر هواء", price: 490 }
+    ]},
+
+    "30000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "40000": { labor: 800, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1180 },
+      { part: "زيت فتيس", price: 1590 },
+      { part: "سيور المحرك", price: 1140 },
+      { part: "مياه تبريد", price: 650 },
+      { part: "فلتر هواء", price: 490 }
+    ]},
+
+    "50000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "60000": { labor: 600, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1180 },
+      { part: "زيت فرامل", price: 160 },
+      { part: "فلتر هواء", price: 490 },
+      
+    ]},
+
+    "70000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 },
+    ]},
+
+    "80000": { labor: 800, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1180 },
+      { part: "زيت فتيس", price: 1590 },
+      { part: "سيور المحرك", price: 1140 },
+      { part: "مياه تبريد", price: 650 },
+      { part: "فلتر هواء", price: 490 }
+    ]},
+
+    "90000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "100000": { labor: 600, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1180 },
+      { part: "فلتر هواء", price: 490 },
+
+    ]}
+  },
+  "Spersso 2025 / اسبريسو 2025": {
+
+    "10000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "20000": { labor: 600, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 2600 },
+      { part: "فلتر هواء", price: 490 }
+    ]},
+
+    "30000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "40000": { labor: 800, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 2600 },
+      { part: "زيت فتيس", price: 1590 },
+      { part: "سيور المحرك", price: 1140 },
+      { part: "مياه تبريد", price: 650 },
+      { part: "فلتر هواء", price: 490 }
+    ]},
+
+    "50000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "60000": { labor: 600, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 2600 },
+      { part: "زيت فرامل", price: 160 },
+      { part: "فلتر هواء", price: 490 },
+      
+    ]},
+
+    "70000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 },
+    ]},
+
+    "80000": { labor: 800, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 2600 },
+      { part: "زيت فتيس", price: 1590 },
+      { part: "سيور المحرك", price: 1140 },
+      { part: "مياه تبريد", price: 650 },
+      { part: "فلتر هواء", price: 490 }
+    ]},
+
+    "90000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "100000": { labor: 600, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 2600},
+      { part: "فلتر هواء", price: 490 },
+
+    ]}
+  },
+  "ALTO / التو": {
+
+    "10000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "20000": { labor: 600, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1138 },
+      { part: "فلتر هواء", price: 420 },
+      { part: "فلتر تكييف", price: 565 }
+    ]},
+
+    "30000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "40000": { labor: 800, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1138 },
+      { part: "زيت فتيس", price: 1590 },
+      { part: "سيور المحرك", price: 830 },
+      { part: "مياه تبريد", price: 650 },
+      { part: "فلتر هواء", price: 420 },
+      { part: "فلتر تكييف", price: 565 }
+    ]},
+
+    "50000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "60000": { labor: 600, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1138 },
+      { part: "زيت فرامل", price: 160 },
+      { part: "فلتر هواء", price: 420 },
+      { part: "فلتر تكييف", price: 565 }
+      
+    ]},
+
+    "70000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 },
+    ]},
+
+    "80000": { labor: 800, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1138 },
+      { part: "زيت فتيس", price: 1590 },
+      { part: "سيور المحرك", price: 830 },
+      { part: "مياه تبريد", price: 650 },
+      { part: "فلتر هواء", price: 420 },
+      { part: "فلتر تكييف", price: 565 }
+    ]},
+
+    "90000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "100000": { labor: 600, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1138},
+      { part: "فلتر هواء", price: 420 },
+      { part: "فلتر تكييف", price: 565 }
+
+    ]}
+  },
+  "New Celario AT": {
+
+    "10000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "20000": { labor: 600, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 },
+      { part: "فلتر هواء", price: 750 },
+      { part: "فلتر تكييف", price: 586 }
+    ]},
+
+    "30000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "40000": { labor: 800, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 },
+      { part: "زيت فتيس", price: 1590 },
+      { part: "سيور المحرك", price: 1200 },
+      { part: "مياه تبريد", price: 650 },
+      { part: "فلتر هواء", price: 750 },
+      { part: "فلتر تكييف", price: 586 }
+    ]},
+
+    "50000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "60000": { labor: 600, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 },
+      { part: "زيت فرامل", price: 160 },
+      { part: "فلتر هواء", price: 750 },
+      { part: "فلتر تكييف", price: 586 }
+      
+    ]},
+
+    "70000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 },
+    ]},
+
+    "80000": { labor: 800, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 },
+      { part: "زيت فتيس", price: 1590 },
+      { part: "سيور المحرك", price: 1200 },
+      { part: "مياه تبريد", price: 650 },
+      { part: "فلتر هواء", price: 750 },
+      { part: "فلتر تكييف", price: 586 }
+    ]},
+
+    "90000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "100000": { labor: 600, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 255 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1777},
+      { part: "فلتر هواء", price: 750 },
+      { part: "فلتر تكييف", price: 586 }
+    ]}
+  },
+  "New Celario Manual": {
+
+    "10000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 230 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "20000": { labor: 600, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 230 },
+      { part: "وردة طبة", price: 30 },
+      { part: "فلتر هواء", price: 497 },
+      { part: "فلتر تكييف", price: 586 }
+    ]},
+
+    "30000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 230 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "40000": { labor: 800, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 230 },
+      { part: "وردة طبة", price: 30 },
+      { part: "زيت فتيس", price: 1590 },
+      { part: "سيور المحرك", price: 1119 },
+      { part: "مياه تبريد", price: 650 },
+      { part: "فلتر هواء", price: 497 },
+      { part: "فلتر تكييف", price: 586 }
+    ]},
+
+    "50000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 230 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "60000": { labor: 600, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 230 },
+      { part: "وردة طبة", price: 30 },
+      { part: "زيت فرامل", price: 160 },
+      { part: "فلتر هواء", price: 497 },
+      { part: "فلتر تكييف", price: 586 }
+      
+    ]},
+
+    "70000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 230 },
+      { part: "وردة طبة", price: 30 },
+    ]},
+
+    "80000": { labor: 800, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 230 },
+      { part: "وردة طبة", price: 30 },
+      { part: "زيت فتيس", price: 1590 },
+      { part: "سيور المحرك", price: 1119 },
+      { part: "مياه تبريد", price: 650 },
+      { part: "فلتر هواء", price: 497 },
+      { part: "فلتر تكييف", price: 586 }
+    ]},
+
+    "90000": { labor: 400, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 230 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "100000": { labor: 600, consumables: 119, parts: [
+      { part: "زيت موتور", price: 1639 },
+      { part: "فلتر زيت", price: 230 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1757},
+      { part: "فلتر هواء", price: 497 },
+      { part: "فلتر تكييف", price: 586 }
+    ]}
+  },
+  "jimny": {
+
+    "10000": { labor: 550, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "20000": { labor: 825, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1940},
+      { part: "فلتر هواء", price: 1477 },
+      { part: "فلتر تكييف", price: 1166 }
+    ]},
+
+    "30000": { labor: 550, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "40000": { labor: 1100, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1940},
+      { part: "زيت فتيس", price: 2000 },
+      { part: "مياه تبريد", price: 650 },
+      { part: "فلتر هواء", price: 1477 },
+      { part: "فلتر تكييف", price: 1166 }
+    ]},
+
+    "50000": { labor: 550, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "60000": { labor: 825, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1940},
+      { part: "زيت فرامل", price: 160 },
+      { part: "فلتر هواء", price: 1477 },
+      { part: "فلتر تكييف", price: 1166 }
+      
+    ]},
+
+    "70000": { labor: 550, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 },
+    ]},
+
+    "80000": { labor: 1100, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1940},
+      { part: "زيت فتيس", price: 2000 },
+      { part: "مياه تبريد", price: 650 },
+      { part: "فلتر هواء", price: 1477 },
+      { part: "فلتر تكييف", price: 1166 }
+    ]},
+
+    "90000": { labor: 550, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "100000": { labor: 825, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1940},
+      { part: "فلتر هواء", price: 1477 },
+      { part: "فلتر تكييف", price: 1166 }
+    ]}
+  },
+  "Vitara22": {
+
+    "10000": { labor: 550, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "20000": { labor: 825, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1940},
+      { part: "فلتر هواء", price: 860 },
+      { part: "فلتر تكييف", price: 950 }
+    ]},
+
+    "30000": { labor: 550, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "40000": { labor: 1100, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1940},
+      { part: "زيت فتيس", price: 2000 },
+      { part: "مياه تبريد", price: 650 },
+      { part: "فلتر هواء", price: 860 },
+      { part: "فلتر تكييف", price: 950 }
+    ]},
+
+    "50000": { labor: 550, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "60000": { labor: 825, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1940},
+      { part: "زيت فرامل", price: 160 },
+      { part: "فلتر هواء", price: 860 },
+      { part: "فلتر تكييف", price: 950 }
+      
+    ]},
+
+    "70000": { labor: 550, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 },
+    ]},
+
+    "80000": { labor: 1100, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1940},
+      { part: "زيت فتيس", price: 2000 },
+      { part: "مياه تبريد", price: 650 },
+      { part: "فلتر هواء", price: 860 },
+      { part: "فلتر تكييف", price: 950 }
+    ]},
+
+    "90000": { labor: 550, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "100000": { labor: 825, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1940},
+      { part: "فلتر هواء", price: 860 },
+      { part: "فلتر تكييف", price: 950 }
+    ]}
+  },
+  "vitara 16": {
+
+    "10000": { labor: 550, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "20000": { labor: 825, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1600},
+      { part: "فلتر هواء", price: 860 },
+      { part: "فلتر تكييف", price: 950 }
+    ]},
+
+    "30000": { labor: 550, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "40000": { labor: 1100, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1600},
+      { part: "زيت فتيس", price: 2000 },
+      { part: "سيور محرك", price: 1500 },
+      { part: "مياه تبريد", price: 650 },
+      { part: "فلتر هواء", price: 860 },
+      { part: "فلتر تكييف", price: 950 }
+    ]},
+
+    "50000": { labor: 550, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "60000": { labor: 825, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1600},
+      { part: "زيت فرامل", price: 160 },
+      { part: "فلتر هواء", price: 860 },
+      { part: "فلتر تكييف", price: 950 }
+      
+    ]},
+
+    "70000": { labor: 550, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 },
+    ]},
+
+    "80000": { labor: 1100, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1600},
+      { part: "زيت فتيس", price: 2000 },
+      { part: "سيور محرك", price: 1500 },
+      { part: "مياه تبريد", price: 650 },
+      { part: "فلتر هواء", price: 860 },
+      { part: "فلتر تكييف", price: 950 }
+    ]},
+
+    "90000": { labor: 550, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 }
+    ]},
+
+    "100000": { labor: 825, consumables: 119, parts: [
+      { part: "زيت موتور", price: 2490 },
+      { part: "فلتر زيت", price: 400 },
+      { part: "وردة طبة", price: 30 },
+      { part: "بوجيهات + اسبراي بوابة", price: 1600},
+      { part: "فلتر هواء", price: 860 },
+      { part: "فلتر تكييف", price: 950 }
+    ]}
+  },
+  "Van": {
+
+    "10000": { labor: 360, consumables: 119, parts: [
+      { part: "زيت موتور", price: 3112 },
+      { part: "فلتر زيت", price: 285 },
+      { part: "وردة طبة", price: 30 },
+      { part: "فلتر هواء", price: 250 },
+      { part: "ابلاتين", price: 415 },
+      { part: "كوندنسر", price: 450 },
+      { part: "بوجيهات", price: 1026},
+    ]},
+
+    "20000": { labor: 520, consumables: 119, parts: [
+      { part: "زيت موتور", price: 3112 },
+      { part: "فلتر زيت", price: 285 },
+      { part: "وردة طبة", price: 30 },
+      { part: "فلتر هواء", price: 250 },
+      { part: "ابلاتين", price: 415 },
+      { part: "كوندنسر", price: 450 },
+      { part: "بوجيهات", price: 1026},
+    ]},
+
+    "30000": { labor: 360, consumables: 119, parts: [
+      { part: "زيت موتور", price: 3112 },
+      { part: "فلتر زيت", price: 285 },
+      { part: "وردة طبة", price: 30 },
+      { part: "فلتر هواء", price: 250 },
+      { part: "ابلاتين", price: 415 },
+      { part: "كوندنسر", price: 450 },
+      { part: "بوجيهات", price: 1026},
+    ]},
+
+    "40000": { labor: 1220, consumables: 119, parts: [
+      { part: "زيت موتور", price: 3112 },
+      { part: "فلتر زيت", price: 285 },
+      { part: "وردة طبة", price: 30 },
+      { part: "فلتر هواء", price: 250 },
+      { part: "ابلاتين", price: 415 },
+      { part: "كوندنسر", price: 450 },
+      { part: "بوجيهات", price: 1026},
+      { part: "فلتر بنزين", price: 405},
+      { part: "سير كاتينة", price: 1450},
+      { part: "بلية كاتينة", price: 1500},
+      { part: "سير دينامو", price: 500},
+      { part: "زيت فرامل", price: 210},
+      { part: "زيت فتييس", price: 1000},
+      { part: "مياه تبريد", price: 630},
+    ]},
+
+    "50000": { labor: 360, consumables: 119, parts: [
+      { part: "زيت موتور", price: 3112 },
+      { part: "فلتر زيت", price: 285 },
+      { part: "وردة طبة", price: 30 },
+      { part: "فلتر هواء", price: 250 },
+      { part: "ابلاتين", price: 415 },
+      { part: "كوندنسر", price: 450 },
+      { part: "بوجيهات", price: 1026},
+    ]},
+
+    "60000": { labor: 520, consumables: 119, parts: [
+      { part: "زيت موتور", price: 3112 },
+      { part: "فلتر زيت", price: 285 },
+      { part: "وردة طبة", price: 30 },
+      { part: "فلتر هواء", price: 250 },
+      { part: "ابلاتين", price: 415 },
+      { part: "كوندنسر", price: 450 },
+      { part: "بوجيهات", price: 1026},
+      
+    ]},
+
+    "70000": { labor: 360, consumables: 119, parts: [
+      { part: "زيت موتور", price: 3112 },
+      { part: "فلتر زيت", price: 285 },
+      { part: "وردة طبة", price: 30 },
+      { part: "فلتر هواء", price: 250 },
+      { part: "ابلاتين", price: 415 },
+      { part: "كوندنسر", price: 450 },
+      { part: "بوجيهات", price: 1026},
+    ]},
+
+    "80000": { labor: 1220, consumables: 119, parts: [
+      { part: "زيت موتور", price: 3112 },
+      { part: "فلتر زيت", price: 285 },
+      { part: "وردة طبة", price: 30 },
+      { part: "فلتر هواء", price: 250 },
+      { part: "ابلاتين", price: 415 },
+      { part: "كوندنسر", price: 450 },
+      { part: "بوجيهات", price: 1026},
+      { part: "فلتر بنزين", price: 405},
+      { part: "سير كاتينة", price: 1450},
+      { part: "بلية كاتينة", price: 1500},
+      { part: "سير دينامو", price: 500},
+      { part: "زيت فرامل", price: 210},
+      { part: "زيت فتييس", price: 1000},
+      { part: "مياه تبريد", price: 630},
+    ]},
+
+    "90000": { labor: 360, consumables: 119, parts: [
+      { part: "زيت موتور", price: 3112 },
+      { part: "فلتر زيت", price: 285 },
+      { part: "وردة طبة", price: 30 },
+      { part: "فلتر هواء", price: 250 },
+      { part: "ابلاتين", price: 415 },
+      { part: "كوندنسر", price: 450 },
+      { part: "بوجيهات", price: 1026},
+    ]},
+
+    "100000": { labor: 520, consumables: 119, parts: [
+      { part: "زيت موتور", price: 3112 },
+      { part: "فلتر زيت", price: 285 },
+      { part: "وردة طبة", price: 30 },
+      { part: "فلتر هواء", price: 250 },
+      { part: "ابلاتين", price: 415 },
+      { part: "كوندنسر", price: 450 },
+      { part: "بوجيهات", price: 1026},
+    ]}
+  }
+
+};
+
+const consumablesFixed = [
+"مراجعة زيت وفلتر",
+"فحص الفرامل",
+"فحص العفشة",
+"فحص الكاوتش"
+];
+
+const optionalParts=[
+{part:"اسبريه فوم",price:92},
+{part:"مياه مساحات",price:30}
+];
+
+
+const carSelect=document.getElementById("car");
+const serviceSelect=document.getElementById("service");
+
+Object.keys(data).forEach(car=>{
+carSelect.innerHTML+=`
+<option value="${car}">
+${car}
+</option>`;
+});
+
+
+carSelect.onchange=function(){
+
+serviceSelect.innerHTML=
+`<option>Select Service</option>`;
+
+Object.keys(data[this.value]).forEach(s=>{
+
+serviceSelect.innerHTML+=`
+<option value="${s}">
+${s} KM
+</option>`;
+
+});
+
+};
+
+
+
+serviceSelect.onchange=function(){
+
+let car=carSelect.value;
+let service=this.value;
+
+let results=
+document.getElementById("results");
+
+results.innerHTML="";
+
+
+data[car][service].parts.forEach(item=>{
+results.innerHTML+=
+createCard(item,true);
+});
+
+
+optionalParts.forEach(item=>{
+results.innerHTML+=
+createCard(item,false,true);
+});
+
+
+updateTotal();
+
+};
+
+
+
+function createCard(
+item,
+checked,
+optional=false
+){
+
+return `
+<div class="col-md-4 mb-4">
+
+<div class="card shadow
+${optional?'optional':''}">
+
+<div class="card-body text-center">
+
+<input
+type="checkbox"
+${checked?'checked':''}
+data-price="${item.price}"
+onchange="updateTotal()">
+
+<h5 class="mt-3">
+${item.part}
+</h5>
+
+<p>
+${item.price} EGP
+</p>
+
+${
+optional?
+"<small class='text-warning'>Optional</small>"
+:""
+}
+
+</div>
+
+</div>
+
+</div>
+`;
+
+}
+
+
+
+function updateTotal(){
+
+let car=carSelect.value;
+let service=serviceSelect.value;
+
+if(!data[car]||!data[car][service]) return;
+
+let labor=
+data[car][service].labor;
+
+let consumables=
+data[car][service].consumables;
+
+let partsSum=0;
+
+document
+.querySelectorAll(
+"input[type=checkbox]"
+)
+.forEach(cb=>{
+
+if(cb.checked)
+partsSum+=Number(
+cb.dataset.price
+);
+
+});
+
+
+let subtotal=
+partsSum+
+labor+
+consumables;
+
+let tax=
+subtotal*0.14;
+
+let total=
+subtotal+tax;
+
+
+document.getElementById(
+"total"
+).innerHTML=`
+
+<b>Parts:</b>
+${partsSum.toFixed(2)} EGP
+<br>
+
+<b>Labor:</b>
+${labor} EGP
+<br>
+
+<b>Consumables:</b>
+${consumables} EGP
+<br>
+
+<b>Tax:</b>
+${tax.toFixed(2)} EGP
+
+<hr>
+
+<b>Total:</b>
+${total.toFixed(2)} EGP
+
+`;
+
+}
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
