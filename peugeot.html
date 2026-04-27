@@ -748,6 +748,159 @@ parts.innerHTML='';
 reviews.innerHTML='';
 cons.innerHTML='';
 
+// function updateTotal(){
+
+// let car = carSelect.value;
+// let service = serviceSelect.value;
+
+// if(!data[car] || !data[car][service]) return;
+
+// let labor = data[car][service].labor;
+// let consumables = data[car][service].consumables;
+
+// let parts = 0;
+
+// /* يحسب أي عنصر عليه سعر */
+// document.querySelectorAll('input[data-price]').forEach(cb=>{
+//   if(cb.checked){
+//     parts += Number(cb.dataset.price);
+//   }
+// });
+
+// /* نسبة الضريبة */
+// let tax = 0.14;
+
+// /* ضريبة كل قسم */
+// let partsTax = parts * tax;
+// let laborTax = labor * tax;
+// let consTax = consumables * tax;
+
+// /* الإجمالي لكل بند */
+// let partsTotal = parts + partsTax;
+// let laborTotal = labor + laborTax;
+// let consumablesTotal = consumables + consTax;
+
+// /* الإجمالي النهائي */
+// let total = partsTotal + laborTotal + consumablesTotal;
+
+
+// document.getElementById('total').innerHTML = `
+
+// <div style="text-align:right;line-height:1.8;font-family:Arial">
+
+// <h4>الفاتورة</h4>
+
+// <hr>
+
+// <b>قطع الغيار</b><br>
+// ${parts.toFixed(2)} جنيه<br>
+// <span style="color:#dc3545;font-weight:bold">ضريبة:</span> ${partsTax.toFixed(2)} جنيه<br>
+// = ${partsTotal.toFixed(2)} جنيه
+
+// <br><br>
+
+// <b>المصنعية</b><br>
+// ${labor.toFixed(2)} جنيه<br>
+// <span style="color:#dc3545;font-weight:bold">ضريبة:</span> ${laborTax.toFixed(2)} جنيه<br>
+// = ${laborTotal.toFixed(2)} جنيه
+
+// <br><br>
+
+// <b>المستهلكات</b><br>
+// ${consumables.toFixed(2)} جنيه<br>
+// <span style="color:#dc3545;font-weight:bold">ضريبة:</span> ${consTax.toFixed(2)} جنيه<br>
+// = ${consumablesTotal.toFixed(2)} جنيه
+
+// <hr>
+
+// <h3>الإجمالي: ${total.toFixed(2)} جنيه</h3>
+
+// </div>
+
+// `;
+
+// }
+
+function updateTotal(){
+
+let car = carSelect.value;
+let service = serviceSelect.value;
+
+if(!data[car] || !data[car][service]) return;
+
+let labor = data[car][service].labor;
+let consumables = data[car][service].consumables;
+
+let parts = 0;
+
+/* يحسب أي عنصر عليه سعر */
+document.querySelectorAll('input[data-price]').forEach(cb=>{
+  if(cb.checked){
+    parts += Number(cb.dataset.price);
+  }
+});
+
+/* نسبة الضريبة */
+let tax = 0.14;
+
+/* الإجمالي قبل الضريبة */
+let subtotal = parts + labor + consumables;
+
+/* الضريبة */
+let partsTax = parts * tax;
+let laborTax = labor * tax;
+let consTax = consumables * tax;
+
+/* الإجمالي لكل بند */
+let partsTotal = parts + partsTax;
+let laborTotal = labor + laborTax;
+let consumablesTotal = consumables + consTax;
+
+/* الإجمالي النهائي */
+let total = partsTotal + laborTotal + consumablesTotal;
+
+
+document.getElementById('total').innerHTML = `
+
+<div style="text-align:right;line-height:1.8;font-family:Arial">
+
+<h4>الفاتورة</h4>
+
+<hr>
+
+
+<b>قطع الغيار</b><br>
+${parts.toFixed(2)} جنيه<br>
+<span style="color:#dc3545;font-weight:bold">ضريبة:</span> ${partsTax.toFixed(2)} جنيه<br>
+= ${partsTotal.toFixed(2)} جنيه
+
+<br><br>
+
+<b>المصنعية</b><br>
+${labor.toFixed(2)} جنيه<br>
+<span style="color:#dc3545;font-weight:bold">ضريبة:</span> ${laborTax.toFixed(2)} جنيه<br>
+= ${laborTotal.toFixed(2)} جنيه
+
+<br><br>
+
+<b>المستهلكات</b><br>
+${consumables.toFixed(2)} جنيه<br>
+<span style="color:#dc3545;font-weight:bold">ضريبة:</span> ${consTax.toFixed(2)} جنيه<br>
+= ${consumablesTotal.toFixed(2)} جنيه
+
+<hr>
+
+<h5>الإجمالي قبل الضريبة: ${subtotal.toFixed(2)} جنيه</h5>
+
+<h3>الإجمالي شامل الضريبة: ${total.toFixed(2)} جنيه</h3>
+
+</div>
+
+`;
+
+}
+
+
 /* قطع غيار اساسية */
 data[car][service].parts.forEach(item=>{
 parts.innerHTML+=createPart(item,true);
@@ -798,180 +951,7 @@ return `
 </div>`;
 }
 
-function updateTotal(){
 
-let car = carSelect.value;
-let service = serviceSelect.value;
-
-if(!data[car] || !data[car][service]) return;
-
-let labor = data[car][service].labor;
-let consumables = data[car][service].consumables;
-
-let parts = 0;
-
-/* يحسب أي عنصر عليه سعر */
-document.querySelectorAll('input[data-price]').forEach(cb=>{
-  if(cb.checked){
-    parts += Number(cb.dataset.price);
-  }
-});
-
-/* نسبة الضريبة */
-let tax = 0.14;
-
-/* ضريبة كل قسم */
-let partsTax = parts * tax;
-let laborTax = labor * tax;
-let consTax = consumables * tax;
-
-/* الإجمالي لكل بند */
-let partsTotal = parts + partsTax;
-let laborTotal = labor + laborTax;
-let consumablesTotal = consumables + consTax;
-
-/* الإجمالي النهائي */
-let total = partsTotal + laborTotal + consumablesTotal;
-
-
-document.getElementById('total').innerHTML = `
-
-<div style="text-align:right;line-height:1.8;font-family:Arial">
-
-<h4>الفاتورة</h4>
-
-<hr>
-
-<b>قطع الغيار</b><br>
-${parts.toFixed(2)} جنيه<br>
-<span style="color:#dc3545;font-weight:bold">ضريبة:</span> ${partsTax.toFixed(2)} جنيه<br>
-= ${partsTotal.toFixed(2)} جنيه
-
-<br><br>
-
-<b>المصنعية</b><br>
-${labor.toFixed(2)} جنيه<br>
-<span style="color:#dc3545;font-weight:bold">ضريبة:</span> ${laborTax.toFixed(2)} جنيه<br>
-= ${laborTotal.toFixed(2)} جنيه
-
-<br><br>
-
-<b>المستهلكات</b><br>
-${consumables.toFixed(2)} جنيه<br>
-<span style="color:#dc3545;font-weight:bold">ضريبة:</span> ${consTax.toFixed(2)} جنيه<br>
-= ${consumablesTotal.toFixed(2)} جنيه
-
-<hr>
-
-<h3>الإجمالي: ${total.toFixed(2)} جنيه</h3>
-
-</div>
-
-`;
-
-}
-
-// function updateTotal(){
-
-// let car = carSelect.value;
-// let service = serviceSelect.value;
-
-// if(!data[car] || !data[car][service]) return;
-
-// let labor = data[car][service].labor;
-// let consumables = data[car][service].consumables;
-
-// let parts = 0;
-
-
-// /* يحسب أي عنصر عليه سعر:
-// - قطع الغيار
-// - المستهلكات الإضافية
-// */
-// document.querySelectorAll(
-// 'input[data-price]'
-// ).forEach(cb=>{
-
-// if(cb.checked){
-// parts += Number(cb.dataset.price);
-// }
-
-// });
-
-
-// let tax = .14;
-
-
-// /* ضريبة كل قسم */
-// let partsTax = parts * tax;
-// let laborTax = labor * tax;
-// let consTax = consumables * tax;
-
-
-// /* شامل الضريبة لكل بند */
-// let partsTotal =
-// parts + partsTax;
-
-// let laborTotal =
-// labor + laborTax;
-
-// let consumablesTotal =
-// consumables + consTax;
-
-
-// /* الإجمالي النهائي */
-// let total =
-// partsTotal +
-// laborTotal +
-// consumablesTotal;
-
-
-
-// document.getElementById('total').innerHTML = `
-
-// <div style='text-align:right;line-height:1.8'>
-
-// <h4> الفاتورة</h4>
-
-// <hr>
-
-// <b> قطع الغيار</b><br>
-// ${parts.toFixed(2)}
-// +
-// ${partsTax.toFixed(2)}
-// =
-// ${partsTotal.toFixed(2)} جنيه
-
-// <br><br>
-
-// <b> المصنعيات</b><br>
-// ${labor.toFixed(2)}
-// +
-// ${laborTax.toFixed(2)}
-// =
-// ${laborTotal.toFixed(2)} جنيه
-
-// <br><br>
-
-// <b> المستهلكات</b><br>
-// ${consumables.toFixed(2)}
-// +
-// ${consTax.toFixed(2)}
-// =
-// ${consumablesTotal.toFixed(2)} جنيه
-
-// <hr>
-
-// <h3>
-//  الإجمالي
-// ${total.toFixed(2)} جنيه
-// </h3>
-
-// </div>
-
-// `;
-
-// }
 
 </script>
 

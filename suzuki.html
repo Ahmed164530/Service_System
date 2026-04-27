@@ -1488,7 +1488,10 @@ document.querySelectorAll('input[data-price]').forEach(cb=>{
 /* نسبة الضريبة */
 let tax = 0.14;
 
-/* ضريبة كل قسم */
+/* الإجمالي قبل الضريبة */
+let subtotal = parts + labor + consumables;
+
+/* الضريبة */
 let partsTax = parts * tax;
 let laborTax = labor * tax;
 let consTax = consumables * tax;
@@ -1509,6 +1512,8 @@ document.getElementById('total').innerHTML = `
 <h4>الفاتورة</h4>
 
 <hr>
+
+
 
 <b>قطع الغيار</b><br>
 ${parts.toFixed(2)} جنيه<br>
@@ -1531,7 +1536,9 @@ ${consumables.toFixed(2)} جنيه<br>
 
 <hr>
 
-<h3>الإجمالي: ${total.toFixed(2)} جنيه</h3>
+<h5>الإجمالي قبل الضريبة: ${subtotal.toFixed(2)} جنيه</h5>
+
+<h3>الإجمالي شامل الضريبة: ${total.toFixed(2)} جنيه</h3>
 
 </div>
 
