@@ -2,11 +2,14 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>نظام الصيانة الذكي</title>
+<title>نظام حساب الصيانة</title>
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
 
-
+/* Navbar */
 .navbar{
 box-shadow:0 2px 15px rgba(0,0,0,.12);
 }
@@ -27,75 +30,107 @@ transition:.3s;
 background:#198754;
 }
 
-.header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-top:25px;
-}
-
+/* Page layout */
 body{
-    font-family: Arial;
-    background:#f2f2f2;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    margin:0;
+background:#f2f2f2;
 }
 
-.container{
-    background:#fff;
-    padding:25px;
-    border-radius:12px;
-    width:360px;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
+.container-box{
+max-width:800px;
+height:450px;
+margin:80px auto;
+background:#fff;
+padding:25px;
+border-radius:12px;
+box-shadow:0 0 12px rgba(0,0,0,0.1);
 }
 
 h2{
-    text-align:center;
-    margin-bottom:20px;
+text-align:center;
+margin-bottom:20px;
 }
 
 select,input,button{
-    width:100%;
-    padding:10px;
-    margin-top:10px;
-    border-radius:8px;
-    border:1px solid #ccc;
-    font-size:16px;
+width:100%;
+padding:10px;
+margin-top:50px;
+border-radius:8px;
+border:1px solid #ccc;
+font-size:16px;
 }
 
 button{
-    background:#28a745;
-    color:#fff;
-    border:none;
-    cursor:pointer;
+background:#28a745;
+color:#fff;
+border:none;
+cursor:pointer;
 }
 
 button:hover{
-    background:#1e7e34;
+background:#1e7e34;
 }
 
 .result{
-    margin-top:15px;
-    text-align:center;
-    font-weight:bold;
-    font-size:18px;
+margin-top:15px;
+text-align:center;
+font-weight:bold;
+font-size:18px;
 }
+
 </style>
 </head>
 
 <body>
 
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 <div class="container">
+
+<a class="navbar-brand" href="index.html">
+CDCM Maintenance System
+</a>
+
+<button class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#menu">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="menu">
+<ul class="navbar-nav ms-auto">
+
+<li class="nav-item">
+<a class="nav-link" href="index.html">Home</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="suzuki.html">Suzuki</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="peugeot.html">Peugeot</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="cal.html">Maintenance Calculator</a>
+</li>
+
+</ul>
+</div>
+
+</div>
+</nav>
+
+<!-- CONTENT -->
+<div class="container-box">
 
 <h2>نظام حساب الصيانة</h2>
 
 <select id="carSelect">
-    <option value="peugeot301">بيجو 301</option>
-    <option value="peugeot508">بيجو 508</option>
-    <option value="suzuki">سوزوكي</option>
+    <option value="peugeot301">301/307/408</option>
+    <option value="peugeot508">508/208/308/2008/3008</option>
+    <option value="suzuki">Suzuki</option>
 </select>
 
 <input type="number" id="kmInput" placeholder="ادخل الكيلومترات">
@@ -106,11 +141,9 @@ button:hover{
 
 </div>
 
-
-
 <script>
 
-// جدول الصيانة الحقيقي
+// بيانات الصيانة
 const data = {
     "peugeot301": [10, 20, 30, 60],
     "peugeot508": [10, 20, 40, 90],
@@ -131,7 +164,6 @@ function calculate(){
 
     let best = null;
 
-    // نبدأ من الأكبر للأصغر عشان نجيب أكبر صيانة تنفع
     for(let i = services.length - 1; i >= 0; i--){
         if(km % services[i] === 0){
             best = services[i];
@@ -145,6 +177,9 @@ function calculate(){
 }
 
 </script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
