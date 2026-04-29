@@ -1476,69 +1476,99 @@ if(!data[car] || !data[car][service]) return;
 let labor = data[car][service].labor;
 let consumables = data[car][service].consumables;
 
+
+/* مجموع قطع الغيار المختارة فقط */
 let parts = 0;
 
-/* يحسب أي عنصر عليه سعر */
-document.querySelectorAll('input[data-price]').forEach(cb=>{
-  if(cb.checked){
-    parts += Number(cb.dataset.price);
-  }
+document.querySelectorAll('input[data-price]').forEach(item=>{
+
+if(item.checked){
+parts += parseFloat(item.dataset.price);
+}
+
 });
 
-/* نسبة الضريبة */
-let tax = 0.14;
-
-/* الإجمالي قبل الضريبة */
-let subtotal = parts + labor + consumables;
 
 /* الضريبة */
-let partsTax = parts * tax;
-let laborTax = labor * tax;
-let consTax = consumables * tax;
+let taxRate = 0.14;
 
-/* الإجمالي لكل بند */
+
+/* قبل الضريبة */
+let subtotal = labor + consumables + parts;
+
+
+/* الضريبة لكل بند */
+let partsTax = parts * taxRate;
+let laborTax = labor * taxRate;
+let consTax = consumables * taxRate;
+
+
+/* بعد الضريبة */
 let partsTotal = parts + partsTax;
 let laborTotal = labor + laborTax;
 let consumablesTotal = consumables + consTax;
+
 
 /* الإجمالي النهائي */
 let total = partsTotal + laborTotal + consumablesTotal;
 
 
+
 document.getElementById('total').innerHTML = `
 
-<div style="text-align:right;line-height:1.8;font-family:Arial">
+<div style="text-align:right;line-height:1.9;font-family:Arial">
 
 <h4>الفاتورة</h4>
-
 <hr>
 
-
-
-<b>قطع الغيار</b><br>
+<b>قطع الغيار المختارة</b><br>
 ${parts.toFixed(2)} جنيه<br>
-<span style="color:#dc3545;font-weight:bold">ضريبة:</span> ${partsTax.toFixed(2)} جنيه<br>
+
+<span style="color:#dc3545;font-weight:bold">
+ضريبة:
+</span>
+${partsTax.toFixed(2)} جنيه<br>
+
 = ${partsTotal.toFixed(2)} جنيه
 
 <br><br>
 
+
 <b>المصنعية</b><br>
 ${labor.toFixed(2)} جنيه<br>
-<span style="color:#dc3545;font-weight:bold">ضريبة:</span> ${laborTax.toFixed(2)} جنيه<br>
+
+<span style="color:#dc3545;font-weight:bold">
+ضريبة:
+</span>
+${laborTax.toFixed(2)} جنيه<br>
+
 = ${laborTotal.toFixed(2)} جنيه
 
 <br><br>
 
+
 <b>المستهلكات</b><br>
 ${consumables.toFixed(2)} جنيه<br>
-<span style="color:#dc3545;font-weight:bold">ضريبة:</span> ${consTax.toFixed(2)} جنيه<br>
+
+<span style="color:#dc3545;font-weight:bold">
+ضريبة:
+</span>
+${consTax.toFixed(2)} جنيه<br>
+
 = ${consumablesTotal.toFixed(2)} جنيه
+
 
 <hr>
 
-<h5>الإجمالي قبل الضريبة: ${subtotal.toFixed(2)} جنيه</h5>
+<h5>
+الإجمالي قبل الضريبة :
+${subtotal.toFixed(2)} جنيه
+</h5>
 
-<h3>الإجمالي شامل الضريبة: ${total.toFixed(2)} جنيه</h3>
+<h3 style="color:#198754">
+الإجمالي شامل الضريبة :
+${total.toFixed(2)} جنيه
+</h3>
 
 </div>
 
