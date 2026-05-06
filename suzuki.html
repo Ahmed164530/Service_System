@@ -1411,8 +1411,23 @@ reviews.innerHTML='';
 cons.innerHTML='';
 
 /* قطع غيار اساسية */
+// data[car][service].parts.forEach(item=>{
+// parts.innerHTML+=createPart(item,true);
+// });
+
 data[car][service].parts.forEach(item=>{
-parts.innerHTML+=createPart(item,true);
+
+// لو فلتر هواء أو تكييف → يبقى اختياري
+let isOptionalFilter =
+item.part.includes("فلتر هواء") ||
+item.part.includes("فلتر تكييف");
+
+parts.innerHTML+=createPart(
+item,
+!isOptionalFilter,   // لو فلتر → unchecked
+isOptionalFilter     // يخليه optional style
+);
+
 });
 
 /* عنوان القطع الاختيارية */
