@@ -106,6 +106,7 @@ input[type=checkbox]{
 transform:scale(1.2)
 }
 </style>
+
 </head>
 <body>
 
@@ -153,8 +154,6 @@ Peugeot
 <a class="nav-link" href="cal.html">Maintenance Calculator</a>
 </li>
 
-
-
 </ul>
 </div>
 
@@ -185,7 +184,6 @@ Peugeot
 
 <div class="row mt-4 g-4">
 
-<!-- قطع الغيار -->
 <div class="col-lg-4">
 <div class="card h-100">
 <div class="card-body">
@@ -197,7 +195,6 @@ Peugeot
 </div>
 </div>
 
-<!-- المراجعات -->
 <div class="col-lg-4">
 <div class="card h-100">
 <div class="card-body">
@@ -209,7 +206,6 @@ Peugeot
 </div>
 </div>
 
-<!-- المستهلكات الثابتة -->
 <div class="col-lg-4">
 <div class="card h-100">
 <div class="card-body">
@@ -231,17 +227,21 @@ Select Car and Service
 
 <script>
 
-/* حط الداتا الكبيرة عندك هنا كاملة */
+
 const data = {
   " Swift / Dzire": {
 
-    "10000": { labor: 480, consumables: 119, parts: [
+    "5000": { labor: 350, consumables: 0, parts: [
+  
+      { part: "مراجعات", price: 0 }
+    ]},
+    "10000": { labor: 700, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "20000": { labor: 720, consumables: 119, parts: [
+    "20000": { labor: 1050, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 },
@@ -250,13 +250,13 @@ const data = {
       { part: "فلتر تكييف", price: 700 }
     ]},
 
-    "30000": { labor: 480, consumables: 119, parts: [
+    "30000": { labor: 700, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "40000": { labor: 960, consumables: 119, parts: [
+    "40000": { labor: 1400, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 },
@@ -268,13 +268,13 @@ const data = {
       { part: "فلتر تكييف", price: 700 }
     ]},
 
-    "50000": { labor: 480, consumables: 119, parts: [
+    "50000": { labor: 700, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "60000": { labor: 720, consumables: 119, parts: [
+    "60000": { labor: 1050, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 },
@@ -284,13 +284,13 @@ const data = {
       { part: "فلتر تكييف", price: 700 }
     ]},
 
-    "70000": { labor: 480, consumables: 119, parts: [
+    "70000": { labor: 700, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 },
     ]},
 
-    "80000": { labor: 960, consumables: 119, parts: [
+    "80000": { labor: 1400, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 },
@@ -302,13 +302,13 @@ const data = {
       { part: "فلتر تكييف", price: 700 }
     ]},
 
-    "90000": { labor: 480, consumables: 119, parts: [
+    "90000": { labor: 700, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "100000": { labor: 720, consumables: 119, parts: [
+    "100000": { labor: 1050, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 },
@@ -318,19 +318,18 @@ const data = {
     ]}
   },  
   "Baleno": {
+    "5000": { labor: 400, consumables: 0, parts: [
+  
+      { part: "مراجعات", price: 0 }
+    ]},
 
-    // "1000": { labor: 0, consumables: 119, parts: [
-    //   { part: "زيت محرك توتال 5w30", price: 1823 },
-    //   { part: "فلتر زيت", price: 280 }
-    // ]},
-
-    "10000": { labor: 520, consumables: 119, parts: [
+    "10000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "20000": { labor: 780, consumables: 119, parts: [
+    "20000": { labor: 1200, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 },
@@ -339,13 +338,13 @@ const data = {
       { part: "فلتر تكييف", price: 700 }
     ]},
 
-    "30000": { labor: 520, consumables: 119, parts: [
+    "30000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "40000": { labor: 1040, consumables: 119, parts: [
+    "40000": { labor: 1600, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 },
@@ -357,13 +356,13 @@ const data = {
       { part: "فلتر تكييف", price: 700 }
     ]},
 
-    "50000": { labor: 520, consumables: 119, parts: [
+    "50000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "60000": { labor: 780, consumables: 119, parts: [
+    "60000": { labor: 1200, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 },
@@ -373,13 +372,13 @@ const data = {
       { part: "فلتر تكييف", price: 700 }
     ]},
 
-    "70000": { labor: 520, consumables: 119, parts: [
+    "70000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 },
     ]},
 
-    "80000": { labor: 1040, consumables: 119, parts: [
+    "80000": { labor: 1600, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 },
@@ -391,13 +390,13 @@ const data = {
       { part: "فلتر تكييف", price: 700 }
     ]},
 
-    "90000": { labor: 520, consumables: 119, parts: [
+    "90000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "100000": { labor: 780, consumables: 119, parts: [
+    "100000": { labor: 1200, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 },
@@ -408,13 +407,18 @@ const data = {
   },
   "CIAZ": {
 
-    "10000": { labor: 520, consumables: 119, parts: [
+    "5000": { labor: 350, consumables: 0, parts: [
+  
+      { part: "مراجعات", price: 0 }
+    ]},
+
+    "10000": { labor: 700, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "20000": { labor: 780, consumables: 119, parts: [
+    "20000": { labor: 1050, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 },
@@ -423,13 +427,13 @@ const data = {
       { part: "فلتر تكييف", price: 660 }
     ]},
 
-    "30000": { labor: 520, consumables: 119, parts: [
+    "30000": { labor: 700, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "40000": { labor: 1040, consumables: 119, parts: [
+    "40000": { labor: 1400, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 },
@@ -442,13 +446,13 @@ const data = {
       { part: "فلتر بنزين", price: 627}
     ]},
 
-    "50000": { labor: 520, consumables: 119, parts: [
+    "50000": { labor: 700, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "60000": { labor: 780, consumables: 119, parts: [
+    "60000": { labor: 1050, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 },
@@ -458,13 +462,13 @@ const data = {
       { part: "فلتر تكييف", price: 660 }
     ]},
 
-    "70000": { labor: 520, consumables: 119, parts: [
+    "70000": { labor: 700, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 },
     ]},
 
-    "80000": { labor: 1040, consumables: 119, parts: [
+    "80000": { labor: 1400, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 },
@@ -477,13 +481,13 @@ const data = {
       { part: "فلتر بنزين", price: 627}
     ]},
 
-    "90000": { labor: 520, consumables: 119, parts: [
+    "90000": { labor: 700, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "100000": { labor: 780, consumables: 119, parts: [
+    "100000": { labor: 1050, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 },
@@ -494,13 +498,18 @@ const data = {
   },
   "Ertiga": {
 
-    "10000": { labor: 520, consumables: 119, parts: [
+    "5000": { labor: 400, consumables: 0, parts: [
+  
+      { part: "مراجعات", price: 0 }
+    ]},
+
+    "10000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "20000": { labor: 780, consumables: 119, parts: [
+    "20000": { labor: 1200, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 },
@@ -509,13 +518,13 @@ const data = {
       { part: "فلتر تكييف", price: 700 }
     ]},
 
-    "30000": { labor: 520, consumables: 119, parts: [
+    "30000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "40000": { labor: 1040, consumables: 119, parts: [
+    "40000": { labor: 1600, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 },
@@ -527,13 +536,13 @@ const data = {
       { part: "فلتر تكييف", price: 700}
     ]},
 
-    "50000": { labor: 520, consumables: 119, parts: [
+    "50000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "60000": { labor: 780, consumables: 119, parts: [
+    "60000": { labor: 1200, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 },
@@ -543,13 +552,13 @@ const data = {
       { part: "فلتر تكييف", price: 700 }
     ]},
 
-    "70000": { labor: 520, consumables: 119, parts: [
+    "70000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 },
     ]},
 
-    "80000": { labor: 1040, consumables: 119, parts: [
+    "80000": { labor: 1600, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 },
@@ -561,13 +570,13 @@ const data = {
       { part: "فلتر تكييف", price: 700}
     ]},
 
-    "90000": { labor: 520, consumables: 119, parts: [
+    "90000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "100000": { labor: 780, consumables: 119, parts: [
+    "100000": { labor: 1200, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2150 },
       { part: "فلتر زيت", price: 280 },
       { part: "وردة طبة", price: 30 },
@@ -577,14 +586,17 @@ const data = {
     ]}
   },
   "Spersso": {
-
-    "10000": { labor: 400, consumables: 119, parts: [
+    "5000": { labor: 250, consumables: 0, parts: [
+  
+      { part: "مراجعات", price: 0 }
+    ]},
+    "10000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "20000": { labor: 600, consumables: 119, parts: [
+    "20000": { labor: 750, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 },
@@ -592,13 +604,13 @@ const data = {
       { part: "فلتر هواء", price: 490 }
     ]},
 
-    "30000": { labor: 400, consumables: 119, parts: [
+    "30000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "40000": { labor: 800, consumables: 119, parts: [
+    "40000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 },
@@ -609,13 +621,13 @@ const data = {
       { part: "فلتر هواء", price: 490 }
     ]},
 
-    "50000": { labor: 400, consumables: 119, parts: [
+    "50000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "60000": { labor: 600, consumables: 119, parts: [
+    "60000": { labor: 750, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 },
@@ -625,13 +637,13 @@ const data = {
       
     ]},
 
-    "70000": { labor: 400, consumables: 119, parts: [
+    "70000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 },
     ]},
 
-    "80000": { labor: 800, consumables: 119, parts: [
+    "80000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 },
@@ -642,13 +654,13 @@ const data = {
       { part: "فلتر هواء", price: 490 }
     ]},
 
-    "90000": { labor: 400, consumables: 119, parts: [
+    "90000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "100000": { labor: 600, consumables: 119, parts: [
+    "100000": { labor: 750, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 },
@@ -659,13 +671,18 @@ const data = {
   },
   "Spersso 2025": {
 
-    "10000": { labor: 400, consumables: 119, parts: [
+    "5000": { labor: 250, consumables: 0, parts: [
+  
+      { part: "مراجعات", price: 0 }
+    ]},
+
+    "10000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "20000": { labor: 600, consumables: 119, parts: [
+    "20000": { labor: 750, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 },
@@ -673,13 +690,13 @@ const data = {
       { part: "فلتر هواء", price: 490 }
     ]},
 
-    "30000": { labor: 400, consumables: 119, parts: [
+    "30000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "40000": { labor: 800, consumables: 119, parts: [
+    "40000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 },
@@ -690,13 +707,13 @@ const data = {
       { part: "فلتر هواء", price: 490 }
     ]},
 
-    "50000": { labor: 400, consumables: 119, parts: [
+    "50000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "60000": { labor: 600, consumables: 119, parts: [
+    "60000": { labor: 750, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 },
@@ -706,13 +723,13 @@ const data = {
       
     ]},
 
-    "70000": { labor: 400, consumables: 119, parts: [
+    "70000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 },
     ]},
 
-    "80000": { labor: 800, consumables: 119, parts: [
+    "80000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 },
@@ -723,13 +740,13 @@ const data = {
       { part: "فلتر هواء", price: 490 }
     ]},
 
-    "90000": { labor: 400, consumables: 119, parts: [
+    "90000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "100000": { labor: 600, consumables: 119, parts: [
+    "100000": { labor: 750, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 },
@@ -739,14 +756,18 @@ const data = {
     ]}
   },
   "ALTO": {
+    "5000": { labor: 250, consumables: 0, parts: [
+  
+      { part: "مراجعات", price: 0 }
+    ]},
 
-    "10000": { labor: 400, consumables: 119, parts: [
+    "10000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "20000": { labor: 600, consumables: 119, parts: [
+    "20000": { labor: 750, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 },
@@ -755,13 +776,13 @@ const data = {
       { part: "فلتر تكييف", price: 565 }
     ]},
 
-    "30000": { labor: 400, consumables: 119, parts: [
+    "30000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "40000": { labor: 800, consumables: 119, parts: [
+    "40000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 },
@@ -773,13 +794,13 @@ const data = {
       { part: "فلتر تكييف", price: 565 }
     ]},
 
-    "50000": { labor: 400, consumables: 119, parts: [
+    "50000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "60000": { labor: 600, consumables: 119, parts: [
+    "60000": { labor: 750, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 },
@@ -790,13 +811,13 @@ const data = {
       
     ]},
 
-    "70000": { labor: 400, consumables: 119, parts: [
+    "70000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 },
     ]},
 
-    "80000": { labor: 800, consumables: 119, parts: [
+    "80000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 },
@@ -808,13 +829,13 @@ const data = {
       { part: "فلتر تكييف", price: 565 }
     ]},
 
-    "90000": { labor: 400, consumables: 119, parts: [
+    "90000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "100000": { labor: 600, consumables: 119, parts: [
+    "100000": { labor: 750, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 },
@@ -825,14 +846,18 @@ const data = {
     ]}
   },
   "New Celario AT": {
+    "5000": { labor: 250, consumables: 0, parts: [
+  
+      { part: "مراجعات", price: 0 }
+    ]},
 
-    "10000": { labor: 400, consumables: 119, parts: [
+    "10000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "20000": { labor: 600, consumables: 119, parts: [
+    "20000": { labor: 750, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 },
@@ -840,13 +865,13 @@ const data = {
       { part: "فلتر تكييف", price: 586 }
     ]},
 
-    "30000": { labor: 400, consumables: 119, parts: [
+    "30000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "40000": { labor: 800, consumables: 119, parts: [
+    "40000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 },
@@ -857,13 +882,13 @@ const data = {
       { part: "فلتر تكييف", price: 586 }
     ]},
 
-    "50000": { labor: 400, consumables: 119, parts: [
+    "50000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "60000": { labor: 600, consumables: 119, parts: [
+    "60000": { labor: 750, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 },
@@ -873,13 +898,13 @@ const data = {
       
     ]},
 
-    "70000": { labor: 400, consumables: 119, parts: [
+    "70000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 },
     ]},
 
-    "80000": { labor: 800, consumables: 119, parts: [
+    "80000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 },
@@ -890,13 +915,13 @@ const data = {
       { part: "فلتر تكييف", price: 586 }
     ]},
 
-    "90000": { labor: 400, consumables: 119, parts: [
+    "90000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "100000": { labor: 600, consumables: 119, parts: [
+    "100000": { labor: 750, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 255 },
       { part: "وردة طبة", price: 30 },
@@ -906,14 +931,17 @@ const data = {
     ]}
   },
   "New Celario Manual": {
-
-    "10000": { labor: 400, consumables: 119, parts: [
+    "5000": { labor: 250, consumables: 0, parts: [
+  
+      { part: "مراجعات", price: 0 }
+    ]},
+    "10000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 230 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "20000": { labor: 600, consumables: 119, parts: [
+    "20000": { labor: 750, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 230 },
       { part: "وردة طبة", price: 30 },
@@ -921,13 +949,13 @@ const data = {
       { part: "فلتر تكييف", price: 586 }
     ]},
 
-    "30000": { labor: 400, consumables: 119, parts: [
+    "30000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 230 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "40000": { labor: 800, consumables: 119, parts: [
+    "40000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 230 },
       { part: "وردة طبة", price: 30 },
@@ -938,13 +966,13 @@ const data = {
       { part: "فلتر تكييف", price: 586 }
     ]},
 
-    "50000": { labor: 400, consumables: 119, parts: [
+    "50000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 230 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "60000": { labor: 600, consumables: 119, parts: [
+    "60000": { labor: 750, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 230 },
       { part: "وردة طبة", price: 30 },
@@ -954,13 +982,13 @@ const data = {
       
     ]},
 
-    "70000": { labor: 400, consumables: 119, parts: [
+    "70000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 230 },
       { part: "وردة طبة", price: 30 },
     ]},
 
-    "80000": { labor: 800, consumables: 119, parts: [
+    "80000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 230 },
       { part: "وردة طبة", price: 30 },
@@ -971,13 +999,13 @@ const data = {
       { part: "فلتر تكييف", price: 586 }
     ]},
 
-    "90000": { labor: 400, consumables: 119, parts: [
+    "90000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 230 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "100000": { labor: 600, consumables: 119, parts: [
+    "100000": { labor: 750, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 1843 },
       { part: "فلتر زيت", price: 230 },
       { part: "وردة طبة", price: 30 },
@@ -987,14 +1015,17 @@ const data = {
     ]}
   },
   "jimny": {
-
-    "10000": { labor: 550, consumables: 119, parts: [
+    "5000": { labor: 500, consumables: 0, parts: [
+  
+      { part: "مراجعات", price: 0 }
+    ]},
+    "10000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "20000": { labor: 825, consumables: 119, parts: [
+    "20000": { labor: 1500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 },
@@ -1003,13 +1034,13 @@ const data = {
       { part: "فلتر تكييف", price: 1166 }
     ]},
 
-    "30000": { labor: 550, consumables: 119, parts: [
+    "30000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "40000": { labor: 1100, consumables: 119, parts: [
+    "40000": { labor: 2000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 },
@@ -1020,13 +1051,13 @@ const data = {
       { part: "فلتر تكييف", price: 1166 }
     ]},
 
-    "50000": { labor: 550, consumables: 119, parts: [
+    "50000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "60000": { labor: 825, consumables: 119, parts: [
+    "60000": { labor: 1500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 },
@@ -1037,13 +1068,13 @@ const data = {
       
     ]},
 
-    "70000": { labor: 550, consumables: 119, parts: [
+    "70000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 },
     ]},
 
-    "80000": { labor: 1100, consumables: 119, parts: [
+    "80000": { labor: 2000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 },
@@ -1054,13 +1085,13 @@ const data = {
       { part: "فلتر تكييف", price: 1166 }
     ]},
 
-    "90000": { labor: 550, consumables: 119, parts: [
+    "90000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "100000": { labor: 825, consumables: 119, parts: [
+    "100000": { labor: 1500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 },
@@ -1070,14 +1101,17 @@ const data = {
     ]}
   },
   "Vitara22": {
-
-    "10000": { labor: 550, consumables: 119, parts: [
+    "5000": { labor: 500, consumables: 0, parts: [
+  
+      { part: "مراجعات", price: 0 }
+    ]},
+    "10000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "20000": { labor: 825, consumables: 119, parts: [
+    "20000": { labor: 1500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 },
@@ -1086,13 +1120,13 @@ const data = {
       { part: "فلتر تكييف", price: 950 }
     ]},
 
-    "30000": { labor: 550, consumables: 119, parts: [
+    "30000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "40000": { labor: 1100, consumables: 119, parts: [
+    "40000": { labor: 2000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 },
@@ -1103,13 +1137,13 @@ const data = {
       { part: "فلتر تكييف", price: 950 }
     ]},
 
-    "50000": { labor: 550, consumables: 119, parts: [
+    "50000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "60000": { labor: 825, consumables: 119, parts: [
+    "60000": { labor: 1500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 },
@@ -1120,13 +1154,13 @@ const data = {
       
     ]},
 
-    "70000": { labor: 550, consumables: 119, parts: [
+    "70000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 },
     ]},
 
-    "80000": { labor: 1100, consumables: 119, parts: [
+    "80000": { labor: 2000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 },
@@ -1137,13 +1171,13 @@ const data = {
       { part: "فلتر تكييف", price: 950 }
     ]},
 
-    "90000": { labor: 550, consumables: 119, parts: [
+    "90000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "100000": { labor: 825, consumables: 119, parts: [
+    "100000": { labor: 1500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 },
@@ -1153,14 +1187,17 @@ const data = {
     ]}
   },
   "vitara 16": {
-
-    "10000": { labor: 550, consumables: 119, parts: [
+    "5000": { labor: 500, consumables: 0, parts: [
+  
+      { part: "مراجعات", price: 0 }
+    ]},
+    "10000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "20000": { labor: 825, consumables: 119, parts: [
+    "20000": { labor: 1500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 },
@@ -1169,13 +1206,13 @@ const data = {
       { part: "فلتر تكييف", price: 950 }
     ]},
 
-    "30000": { labor: 550, consumables: 119, parts: [
+    "30000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "40000": { labor: 1100, consumables: 119, parts: [
+    "40000": { labor: 2000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 },
@@ -1187,13 +1224,13 @@ const data = {
       { part: "فلتر تكييف", price: 950 }
     ]},
 
-    "50000": { labor: 550, consumables: 119, parts: [
+    "50000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "60000": { labor: 825, consumables: 119, parts: [
+    "60000": { labor: 1500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 },
@@ -1204,13 +1241,13 @@ const data = {
       
     ]},
 
-    "70000": { labor: 550, consumables: 119, parts: [
+    "70000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 },
     ]},
 
-    "80000": { labor: 1100, consumables: 119, parts: [
+    "80000": { labor: 2000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 },
@@ -1222,13 +1259,13 @@ const data = {
       { part: "فلتر تكييف", price: 950 }
     ]},
 
-    "90000": { labor: 550, consumables: 119, parts: [
+    "90000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 }
     ]},
 
-    "100000": { labor: 825, consumables: 119, parts: [
+    "100000": { labor: 1500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 400 },
       { part: "وردة طبة", price: 30 },
@@ -1238,8 +1275,11 @@ const data = {
     ]}
   },
   "Van": {
-
-    "10000": { labor: 360, consumables: 119, parts: [
+    "5000": { labor: 250, consumables: 0, parts: [
+  
+      { part: "مراجعات", price: 0 }
+    ]},
+    "10000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 285 },
       { part: "وردة طبة", price: 30 },
@@ -1249,7 +1289,7 @@ const data = {
       { part: "بوجيهات", price: 1026},
     ]},
 
-    "20000": { labor: 520, consumables: 119, parts: [
+    "20000": { labor: 750, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 285 },
       { part: "وردة طبة", price: 30 },
@@ -1259,7 +1299,7 @@ const data = {
       { part: "بوجيهات", price: 1026},
     ]},
 
-    "30000": { labor: 360, consumables: 119, parts: [
+    "30000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 285 },
       { part: "وردة طبة", price: 30 },
@@ -1269,7 +1309,7 @@ const data = {
       { part: "بوجيهات", price: 1026},
     ]},
 
-    "40000": { labor: 1220, consumables: 119, parts: [
+    "40000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 285 },
       { part: "وردة طبة", price: 30 },
@@ -1286,7 +1326,7 @@ const data = {
       { part: "مياه تبريد", price: 630},
     ]},
 
-    "50000": { labor: 360, consumables: 119, parts: [
+    "50000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 285 },
       { part: "وردة طبة", price: 30 },
@@ -1296,7 +1336,7 @@ const data = {
       { part: "بوجيهات", price: 1026},
     ]},
 
-    "60000": { labor: 520, consumables: 119, parts: [
+    "60000": { labor: 750, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 285 },
       { part: "وردة طبة", price: 30 },
@@ -1307,7 +1347,7 @@ const data = {
       
     ]},
 
-    "70000": { labor: 360, consumables: 119, parts: [
+    "70000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 285 },
       { part: "وردة طبة", price: 30 },
@@ -1317,7 +1357,7 @@ const data = {
       { part: "بوجيهات", price: 1026},
     ]},
 
-    "80000": { labor: 1220, consumables: 119, parts: [
+    "80000": { labor: 1000, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 285 },
       { part: "وردة طبة", price: 30 },
@@ -1334,7 +1374,7 @@ const data = {
       { part: "مياه تبريد", price: 630},
     ]},
 
-    "90000": { labor: 360, consumables: 119, parts: [
+    "90000": { labor: 500, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 285 },
       { part: "وردة طبة", price: 30 },
@@ -1344,7 +1384,7 @@ const data = {
       { part: "بوجيهات", price: 1026},
     ]},
 
-    "100000": { labor: 520, consumables: 119, parts: [
+    "100000": { labor: 750, consumables: 119, parts: [
       { part: "زيت محرك توتال 5w30", price: 2800 },
       { part: "فلتر زيت", price: 285 },
       { part: "وردة طبة", price: 30 },
@@ -1358,7 +1398,6 @@ const data = {
 };
 
 
-/* مراجعات ثابتة */
 const reviewItems=[
 "فحص الفرامل",
 "فحص العفشة",
@@ -1367,7 +1406,7 @@ const reviewItems=[
 "مراجعة انوار"
 ];
 
-/* مستهلكات ثابتة */
+
 const fixedConsumables=[
 "دواسات للسيارة",
 "تكييس السيارة",
@@ -1376,10 +1415,11 @@ const fixedConsumables=[
 
 ];
 
-/* قطع غيار اختيارية تحت الأساسية */
+
 const optionalParts=[
 {part:"اسبريه فوم",price:100},
-{part:"مياه مساحات",price:30}
+{part:"مياه مساحات",price:30},
+{part:"غسيل",price:65},
 ];
 
 const carSelect=document.getElementById('car');
@@ -1410,41 +1450,33 @@ parts.innerHTML='';
 reviews.innerHTML='';
 cons.innerHTML='';
 
-/* قطع غيار اساسية */
-// data[car][service].parts.forEach(item=>{
-// parts.innerHTML+=createPart(item,true);
-// });
 
 data[car][service].parts.forEach(item=>{
 
-// لو فلتر هواء أو تكييف → يبقى اختياري
+
 let isOptionalFilter =
 item.part.includes("فلتر هواء") ||
 item.part.includes("فلتر تكييف");
 
 parts.innerHTML+=createPart(
 item,
-!isOptionalFilter,   // لو فلتر → unchecked
-isOptionalFilter     // يخليه optional style
+!isOptionalFilter,   
+isOptionalFilter    
 );
 
 });
 
-/* عنوان القطع الاختيارية */
 parts.innerHTML+=`
 <div class='optional-title'>قطع غيار اختيارية</div>`;
 
-/* قطع غيار اختيارية تحت الأساسية */
 optionalParts.forEach(item=>{
 parts.innerHTML+=createPart(item,false,true);
 });
 
-/* مراجعات */
 reviewItems.forEach(item=>{
 reviews.innerHTML+=fixedBox(item);
 });
 
-/* مستهلكات ثابتة */
 fixedConsumables.forEach(item=>{
 cons.innerHTML+=fixedBox(item);
 });
@@ -1487,7 +1519,6 @@ let labor = data[car][service].labor;
 let consumables = data[car][service].consumables;
 
 
-/* مجموع قطع الغيار المختارة فقط */
 let parts = 0;
 
 document.querySelectorAll('input[data-price]').forEach(item=>{
@@ -1499,27 +1530,22 @@ parts += parseFloat(item.dataset.price);
 });
 
 
-/* الضريبة */
 let taxRate = 0.14;
 
 
-/* قبل الضريبة */
 let subtotal = labor + consumables + parts;
 
 
-/* الضريبة لكل بند */
 let partsTax = parts * taxRate;
 let laborTax = labor * taxRate;
 let consTax = consumables * taxRate;
 
 
-/* بعد الضريبة */
 let partsTotal = parts + partsTax;
 let laborTotal = labor + laborTax;
 let consumablesTotal = consumables + consTax;
 
 
-/* الإجمالي النهائي */
 let total = partsTotal + laborTotal + consumablesTotal;
 
 
