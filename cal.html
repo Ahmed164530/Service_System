@@ -163,6 +163,9 @@ data-bs-target="#menu">
 
 <select id="carSelect">
     <option value="peugeot301">301/307/408</option>
+    <option value="peugeot301-2020">301 (2020-NOW)</option>
+    <option value="peugeot208">208</option>
+    <option value="peugeot2008-4">2008(4 سرعات)</option>
     <option value="peugeot508">508/208/308/2008/3008</option>
     <option value="suzuki">Suzuki</option>
 </select>
@@ -179,9 +182,12 @@ data-bs-target="#menu">
 
 // بيانات الصيانة
 const data = {
-    "peugeot301": [10, 20, 30, 60],
-    "peugeot508": [10, 20, 40, 90],
-    "suzuki": [10, 20, 40]
+    "peugeot301": [10, 20, 30, 60,80],
+    "peugeot301-2020": [10, 20,  60,80],
+    "peugeot208": [10, 20, 30,80,90],
+    "peugeot2008-4": [10, 20, 30, 80,90],
+    "peugeot508": [10, 20, 80,90],
+    "suzuki": [10, 20,40,60]
 };
 
 function calculate(){
