@@ -1,225 +1,301 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<title>Maintenance Calculator</title>
-<link rel="icon" href="CDCM.jfif" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDCM Maintenance Calculator</title>
+    <link rel="icon" href="CDCM.jfif" type="image/jpeg">
 
-<!-- Bootstrap -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
 
+    <style>
+        body {
+            background: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
 
-<style>
-/* Navbar */
-.navbar{
-box-shadow:0 2px 15px rgba(0,0,0,.12);
-}
+        .navbar {
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.12);
+        }
 
-.navbar-brand{
-font-size:24px;
-font-weight:bold;
-}
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+        }
 
-.nav-link{
-padding:10px 18px !important;
-border-radius:8px;
-font-weight:600;
-transition:.3s;
-}
+        .nav-link {
+            padding: 10px 18px !important;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
 
-.nav-link:hover{
-background:#198754;
-}
+        .nav-link:hover {
+            background: #198754;
+        }
 
-/* Page layout */
-body{
-background:#f2f2f2;
-}
+        .container-box {
+            max-width: 800px;
+            width: 95%;
+            margin: 80px auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+        }
 
-/* ✅ أهم تعديل هنا */
-.container-box{
-max-width:800px;
-width:95%;
-margin:80px auto;
-background:#fff;
-padding:25px;
-border-radius:12px;
-box-shadow:0 0 12px rgba(0,0,0,0.1);
-height:auto; /* مهم جدًا */
-}
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
 
-/* Title */
-h2{
-text-align:center;
-margin-bottom:20px;
-font-size:22px;
-}
+        select,
+        input,
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
 
-/* Inputs */
-select,
-input,
-button{
-width:100%;
-padding:10px;
-margin-top:15px; /* بدل 50px */
-border-radius:8px;
-border:1px solid #ccc;
-font-size:16px;
-}
+        button {
+            background: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
 
-/* Button */
-button{
-background:#28a745;
-color:#fff;
-border:none;
-cursor:pointer;
-}
+        button:hover {
+            background: #1e7e34;
+        }
 
-button:hover{
-background:#1e7e34;
-}
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 1.8;
+        }
 
-/* Result */
-.result{
-margin-top:15px;
-text-align:center;
-font-weight:bold;
-font-size:18px;
-}
+        .result.success {
+            color: #198754;
+        }
 
-/* 📱 Responsive */
-@media (max-width: 768px){
+        .result.error {
+            color: #dc3545;
+        }
 
-.container-box{
-margin:40px auto;
-padding:15px;
-}
+        @media (max-width: 768px) {
+            .container-box {
+                margin: 40px auto;
+                padding: 15px;
+            }
 
-.navbar-brand{
-font-size:18px;
-}
+            .navbar-brand {
+                font-size: 18px;
+            }
 
-h2{
-font-size:18px;
-}
+            h2 {
+                font-size: 18px;
+            }
 
-select,
-input,
-button{
-font-size:14px;
-padding:8px;
-}
-
-}
-</style>
+            select,
+            input,
+            button {
+                font-size: 14px;
+                padding: 8px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-<div class="container">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
 
-<a class="navbar-brand" href="index.html">
-CDCM Maintenance System
-</a>
+            <a class="navbar-brand" href="index.html">
+                CDCM Maintenance System
+            </a>
 
-<button class="navbar-toggler"
-type="button"
-data-bs-toggle="collapse"
-data-bs-target="#menu">
-<span class="navbar-toggler-icon"></span>
-</button>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#menu"
+                aria-controls="menu"
+                aria-expanded="false"
+                aria-label="فتح القائمة"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-<div class="collapse navbar-collapse" id="menu">
-<ul class="navbar-nav ms-auto">
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto">
 
-<li class="nav-item">
-<a class="nav-link" href="index.html">Home</a>
-</li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
 
-<li class="nav-item">
-<a class="nav-link" href="suzuki.html">Suzuki</a>
-</li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="suzuki.html">Suzuki</a>
+                    </li>
 
-<li class="nav-item">
-<a class="nav-link" href="peugeot.html">Peugeot</a>
-</li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="peugeot.html">Peugeot</a>
+                    </li>
 
-<li class="nav-item">
-<a class="nav-link" href="cal.html">Maintenance Calculator</a>
-</li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="cal.html">
+                            Maintenance Calculator
+                        </a>
+                    </li>
 
-</ul>
-</div>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-</div>
-</nav>
+    <!-- CONTENT -->
+    <main class="container-box">
 
-<!-- CONTENT -->
-<div class="container-box">
+        <h2>نظام حساب الصيانة</h2>
 
-<h2>نظام حساب الصيانة</h2>
+        <label for="carSelect" class="form-label">
+            اختر نوع السيارة
+        </label>
 
-<select id="carSelect">
-    <option value="peugeot301">301/307/408</option>
-    <option value="peugeot301-2020">301 (2020-NOW)</option>
-    <option value="peugeot208">208</option>
-    <option value="peugeot2008-4">2008(4 سرعات)</option>
-    <option value="peugeot508">508/208/308/2008/3008</option>
-    <option value="suzuki">Suzuki</option>
-</select>
+        <select id="carSelect">
+            <option value="peugeot301">301 / 307 / 408</option>
+            <option value="peugeot301-2020">301 (2020 - الآن)</option>
+            <option value="peugeot208">208</option>
+            <option value="peugeot2008-4">2008 (4 سرعات)</option>
+            <option value="peugeot508">508 / 208 / 308 / 2008 / 3008</option>
+            <option value="suzuki">Suzuki</option>
+        </select>
 
-<input type="number" id="kmInput" placeholder="ادخل الكيلومترات">
+        <label for="kmInput" class="form-label mt-3">
+            أدخل عدد الكيلومترات
+        </label>
 
-<button onclick="calculate()">احسب الصيانة</button>
+        <input
+            type="number"
+            id="kmInput"
+            placeholder="مثال: 180000"
+            min="1"
+            step="1"
+        >
 
-<div class="result" id="result"></div>
+        <button type="button" id="calculateBtn">
+            احسب الصيانة
+        </button>
 
-</div>
+        <div
+            class="result"
+            id="result"
+            role="status"
+            aria-live="polite"
+        ></div>
 
-<script>
+    </main>
 
-// بيانات الصيانة
-const data = {
-    "peugeot301": [10, 20, 30, 60,80],
-    "peugeot301-2020": [10, 20,  60,80],
-    "peugeot208": [10, 20, 30,80,90],
-    "peugeot2008-4": [10, 20, 30, 80,90],
-    "peugeot508": [10, 20, 80,90],
-    "suzuki": [10, 20,40,60]
-};
+    <script>
+        // بيانات الصيانة بالألف كيلومتر
+        const data = {
+            "peugeot301": [10, 20, 30, 60, 80],
+            "peugeot301-2020": [10, 20, 60, 80],
+            "peugeot208": [10, 20, 30, 80, 90],
+            "peugeot2008-4": [10, 20, 30, 80, 90],
+            "peugeot508": [10, 20, 80, 90],
+            "suzuki": [10, 20, 40, 60]
+        };
 
-function calculate(){
+        function calculate() {
+            const car = document.getElementById("carSelect").value;
+            let km = Number(document.getElementById("kmInput").value);
 
-    let car = document.getElementById("carSelect").value;
-    let km = Number(document.getElementById("kmInput").value);
-
-    if(!km || km <= 0){
-        document.getElementById("result").innerHTML = "ادخل كيلومترات صحيحة";
-        return;
-    }
-
-    let services = data[car];
-
-    let best = null;
-
-    for(let i = services.length - 1; i >= 0; i--){
-        if(km % services[i] === 0){
-            best = services[i];
-            break;
-        }
-    }
-
-    document.getElementById("result").innerHTML =
-        best ? ("أنسب صيانة: " + best + " ألف كم")
-             : "لا يوجد تطابق مباشر";
+// لو الرقم أقل من 1000، اعتبره بالألف كيلومتر
+if (km > 0 && km < 1000) {
+    km *= 1000;
 }
+            const result = document.getElementById("result");
 
-</script>
+            result.className = "result";
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            if (!Number.isFinite(km) || km <= 0 || !Number.isInteger(km)) {
+                result.textContent = "من فضلك أدخل عدد كيلومترات صحيحًا.";
+                result.classList.add("error");
+                return;
+            }
+
+            let best = null;
+
+            if (car === "suzuki") {
+                const thousands = km / 1000;
+
+                /*
+                 * قواعد سوزوكي:
+                 * 1. مضاعفات 40 ألف لها الأولوية.
+                 * 2. مضاعفات 60 ألف تظهر كصيانة مميزة
+                 *    إذا لم تتعارض مع مضاعفات 40 ألف.
+                 * 3. بعد ذلك نتحقق من 20 ألف ثم 10 آلاف.
+                 */
+
+                if (thousands % 40 === 0) {
+                    best = 40;
+                } else if (thousands % 60 === 0) {
+                    best = 60;
+                } else if (thousands % 20 === 0) {
+                    best = 20;
+                } else if (thousands % 10 === 0) {
+                    best = 10;
+                }
+            } else {
+                const services = data[car];
+
+                // اختيار أكبر دورة صيانة تنطبق على الكيلومترات
+                for (let i = services.length - 1; i >= 0; i--) {
+                    const serviceKm = services[i] * 1000;
+
+                    if (km % serviceKm === 0) {
+                        best = services[i];
+                        break;
+                    }
+                }
+            }
+
+            if (best !== null) {
+                result.textContent = "أنسب صيانة: " + best + " ألف كم";
+                result.classList.add("success");
+            } else {
+                result.textContent = "لا يوجد تطابق مباشر مع دورات الصيانة المحددة.";
+                result.classList.add("error");
+            }
+        }
+
+        // تشغيل الحساب عند الضغط على الزر أو Enter
+        document.getElementById("calculateBtn").addEventListener("click", calculate);
+
+        document.getElementById("kmInput").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                calculate();
+            }
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
